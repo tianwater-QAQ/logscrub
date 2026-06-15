@@ -49,7 +49,7 @@ print(result.total)       # 2
 
 | Category | Examples |
 |---|---|
-| API keys / tokens | OpenAI (`sk-…`), GitHub (`ghp_…`), AWS (`AKIA…`), Google (`AIza…`), Slack (`xox…`) |
+| API keys / tokens | OpenAI (`sk-…`), GitHub (`ghp_…`), AWS (`AKIA…`), Google (`AIza…`), Slack (`xox…`), Stripe (`sk_live_…`), Twilio (`SK…`), SendGrid (`SG.…`) |
 | Auth | `Bearer …`, JWTs (`eyJ….….…`) |
 | Keys | `-----BEGIN … PRIVATE KEY-----` blocks |
 | Named values | `password = …`, `api_key: …`, `client_secret=…` (value redacted, key kept) |
