@@ -19,6 +19,22 @@ def test_aws_and_google():
     assert r.findings["google_api_key"] == 1
 
 
+def test_stripe_twilio_sendgrid():
+    r = scrub("stripe sk_live_" + "a" * 24)
+    assert r.findings["stripe_key"] == 1 and "sk_live_aaaa" not in r.text
+    r = scrub("twilio SK" + "0" * 32)
+    assert r.findings["twilio_key"] == 1
+    r = scrub("sendgrid SG." + "x" * 22 + "." + "y" * 30)
+    assert r.findings["sendgrid_key"] == 1
+
+
+def test_stripe_does_not_clash_with_openai():
+    # openai uses sk- (hyphen); stripe uses sk_ (underscore) — keep them distinct
+    r = scrub("sk-" + "A" * 40)
+    assert r.findings["openai_key"] == 1
+    assert "stripe_key" not in r.findings
+
+
 def test_jwt_and_bearer():
     jwt = "eyJhbGciOi.eyJzdWIiOiIxMjM0NTY.SflKxwRJSMeKKF2QT4"
     r = scrub(f"Authorization: Bearer {jwt}")
